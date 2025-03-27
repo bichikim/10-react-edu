@@ -9,8 +9,7 @@ function App() {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
-          <Link to="/content1">Content1</Link>
-          <Link to="/content2">Content2</Link>
+          <Link to="/contents/props-children">Contents/PropsChildren</Link>
         </nav>
       </header>
       <Outlet />
