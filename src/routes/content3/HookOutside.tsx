@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-// outside hook does not work
+// outside hook does not work and throw error
 // eslint-disable-next-line react-hooks/rules-of-hooks
 // const [state, setState] = useState(0)
 
