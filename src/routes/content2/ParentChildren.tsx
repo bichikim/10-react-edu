@@ -9,7 +9,7 @@ const NameInput = (props: NameInputProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(event.target.value)
   }
-  return <input type="text" onChange={handleChange} value={props.name ?? ''}></input>
+  return <input title="name" placeholder="name" type="text" onChange={handleChange} value={props.name ?? ''}></input>
 }
 
 interface AgeProps {
@@ -21,10 +21,10 @@ const Age = (props: AgeProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(parseInt(event.target.value))
   }
-  return <input type="number" onChange={handleChange} value={props.age ?? 0}></input>
+  return <input title="age" placeholder="age" type="number" onChange={handleChange} value={props.age ?? 0}></input>
 }
 
-interface CardProps {
+interface CardProps {    
   name: string
   age: number
   onClick?: () => void
