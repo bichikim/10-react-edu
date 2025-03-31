@@ -6,6 +6,10 @@
     "noImplicitAny": false,
     "noEmit": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+    "baseUrl": ".",
   },
   "files": [],
   "references": [

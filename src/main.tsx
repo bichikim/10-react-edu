@@ -1,6 +1,10 @@
 import './index.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 import App from './App.tsx'
 import Home from './routes/Home.tsx'
 import About from './routes/About.tsx'
@@ -22,12 +26,15 @@ import Fetch from './routes/content3/Fetch.tsx'
 import UseEffect from './routes/content3/UseEffect.tsx'
 import Ref from './routes/content3/Ref.tsx'
 import HookOutside from './routes/content3/HookOutside.tsx'
+import Main from './routes/mini-project/Main.tsx'
+const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Routes>
-        <Route element={<App />}>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<App />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="content1">
@@ -53,9 +60,11 @@ createRoot(document.getElementById('root')!).render(
             <Route path="ref" element={<Ref />} />
             <Route path="use-effect" element={<UseEffect />} />
           </Route>
+          <Route path="mini-project" element={<Main />} />
         </Route>
 
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   </StrictMode>,
 )

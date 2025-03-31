@@ -4,8 +4,8 @@ import { Outlet, Link } from 'react-router'
 function App() {
   return (
     <div className="flex absolute inset-0">
-      <aside className="h-full flex-0 p-2 bg-gray-100">
-        <nav className="flex flex-col gap-2 h-full">
+      <aside className="h-full w-max p-2 bg-gray-100 overflow-y-auto overflow-x-hidden">
+        <nav className="flex flex-col gap-2 h-full w-max">
           <Link to="/">Home</Link>
           <Link to="/about">About</Link>
           <Link to="/content1/condition-jsx">Contents/ConditionJSX</Link>
@@ -25,6 +25,7 @@ function App() {
           <Link to="/content3/hook-outside">Contents/HookOutside</Link>
           <Link to="/content3/ref">Contents/Ref</Link>
           <Link to="/content3/use-effect">Contents/UseEffect</Link>
+          <Link to="/mini-project">Mini Project</Link>
         </nav>
       </aside>
       <Outlet />
