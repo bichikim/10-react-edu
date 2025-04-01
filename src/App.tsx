@@ -1,6 +1,5 @@
 import { Outlet, Link } from 'react-router'
 
-
 function App() {
   return (
     <div className="flex absolute inset-0">
@@ -25,6 +24,10 @@ function App() {
           <Link to="/content3/hook-outside">Contents/HookOutside</Link>
           <Link to="/content3/ref">Contents/Ref</Link>
           <Link to="/content3/use-effect">Contents/UseEffect</Link>
+          <Link to="/content4/theme-context">Contents/ThemeContext</Link>
+          <Link to="/content4/error-boundary">Contents/ErrorBoundary</Link>
+          <Link to="/content4/suspense">Contents/Suspense</Link>
+          <Link to="/content4/debounce-throttle">Contents/DebounceThrottle</Link>
           <Link to="/mini-project">Mini Project</Link>
         </nav>
       </aside>
