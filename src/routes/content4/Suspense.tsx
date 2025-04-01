@@ -9,7 +9,7 @@ async function fetchData() {
 
 // 비동기 컴포넌트
 const AsyncContent = () => {
-  const data = useFetch(null, fetchData)
+  const data = useFetch(fetchData)
   return <div>{data?.message}</div>
 }
 

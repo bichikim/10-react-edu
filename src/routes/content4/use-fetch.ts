@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 
-export const useFetch = (payload: any, loader: (payload) => Promise<any>) => {
+export const useFetch = <T, R>(loader: (payload?: T) => Promise<R>, payload?: T): R | undefined => {
   const loaderRef = useRef(loader)
   const [promise, setPromise] = useState<Promise<any> | null>(null)
   const [data, setData] = useState<any>(null)
