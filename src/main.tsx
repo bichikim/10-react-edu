@@ -29,6 +29,8 @@ import { ErrorBoundaryExample } from './routes/content4/ErrorBoundary.tsx'
 import { SuspenseExample } from './routes/content4/Suspense.tsx'
 import { DebounceThrottleExample } from './routes/content4/DebounceThrottle.tsx'
 import { ElementEvent } from './routes/content1/ElementEvent.tsx'
+import ExcludeDeps from './routes/content3/ExcludeDeps.tsx'
+
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
@@ -58,6 +60,7 @@ createRoot(document.getElementById('root')!).render(
             </Route>
             <Route path="content3">
               <Route path="deps" element={<Deps />} />
+              <Route path="exclude-deps" element={<ExcludeDeps />} />
               <Route path="fetch" element={<Fetch />} />
               <Route path="hook-outside" element={<HookOutside />} />
               <Route path="ref" element={<Ref />} />

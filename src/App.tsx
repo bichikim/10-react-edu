@@ -21,6 +21,7 @@ function App() {
           <Link to="/content2/lifting-state">Contents/LiftingState</Link>
           <Link to="/content2/parent-children">Contents/ParentChildren</Link>
           <Link to="/content3/deps">Contents/Deps</Link>
+          <Link to="/content3/exclude-deps">Contents/ExcludeDeps</Link>
           <Link to="/content3/fetch">Contents/Fetch</Link>
           <Link to="/content3/hook-outside">Contents/HookOutside</Link>
           <Link to="/content3/ref">Contents/Ref</Link>
