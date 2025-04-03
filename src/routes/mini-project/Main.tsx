@@ -1,24 +1,18 @@
-
-import {useState} from 'react'
-import { useTrendingMovie } from './apis/trending-movie'
-
+import { Suspense } from 'react'
+import { Trending } from './Trending'
+import { ErrorBoundary } from 'react-error-boundary'
+import { QueryErrorResetBoundary } from '@tanstack/react-query'
 
 export default function Main() {
-    const [timeWindow, setTimeWindow] = useState<'day' | 'week'>('day')
-    const trendingMovie = useTrendingMovie(timeWindow)
-
   return (
-    <div>
-      <h1>Main Trending Movie {timeWindow}</h1>
-      <div className='flex gap-2'>
-        <button className='bg-blue-500 text-white p-2 rounded-md cursor-pointer' onClick={() => setTimeWindow('day')}>Day</button>
-        <button className='bg-blue-500 text-white p-2 rounded-md cursor-pointer' onClick={() => setTimeWindow('week')}>Week</button>
-      </div>
-      <div>
-        {trendingMovie.data?.data.results.map((movie) => (
-          <div key={movie.id}>{movie.title}</div>
-        ))} 
-      </div>
-    </div>
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary fallback={<div>Error</div>} onReset={reset}>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Trending />
+          </Suspense>
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
   )
 }

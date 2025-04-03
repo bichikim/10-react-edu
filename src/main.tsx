@@ -28,6 +28,7 @@ import { ThemeContextExample } from './routes/content4/ThemeContext.tsx'
 import { ErrorBoundaryExample } from './routes/content4/ErrorBoundary.tsx'
 import { SuspenseExample } from './routes/content4/Suspense.tsx'
 import { DebounceThrottleExample } from './routes/content4/DebounceThrottle.tsx'
+import { ElementEvent } from './routes/content1/ElementEvent.tsx'
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
@@ -41,6 +42,7 @@ createRoot(document.getElementById('root')!).render(
             <Route path="content1">
               <Route path="condition-jsx" element={<ConditionJSX />} />
               <Route path="create-component" element={<CreateComponent />} />
+              <Route path="element-event" element={<ElementEvent />} />
               <Route path="insert-children" element={<InsertChildren />} />
               <Route path="insert-js" element={<InsertJs />} />
               <Route path="jsx-element" element={<JSXElement />} />

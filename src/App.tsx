@@ -10,6 +10,7 @@ function App() {
           <Link to="/content1/condition-jsx">Contents/ConditionJSX</Link>
           <Link to="/content1/create-component">Contents/CreateComponent</Link>
           <Link to="/content1/insert-children">Contents/InsertChildren</Link>
+          <Link to="/content1/element-event">Contents/ElementEvent</Link>
           <Link to="/content1/insert-js">Contents/InsertJs</Link>
           <Link to="/content1/jsx-element">Contents/JSXElement</Link>
           <Link to="/content1/loop-jsx">Contents/LoopJSX</Link>

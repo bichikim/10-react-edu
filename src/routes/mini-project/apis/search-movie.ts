@@ -1,5 +1,5 @@
 import { api } from '@/utils/api'
-import { useQuery } from '@tanstack/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import { Movie } from './types'
 
 export interface SearchMoviePayload {
@@ -28,11 +28,9 @@ export interface SearchMovieResponse {
   total_results: number
 }
 
-
 export const useSearchMovie = (payload: SearchMoviePayload) => {
-  return useQuery({
+  return useSuspenseQuery({
     queryKey: ['movie', payload.query],
     queryFn: () => api.get(`/movie/search`, { params: payload }),
   })
 }
-
