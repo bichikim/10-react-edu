@@ -1,26 +1,79 @@
 import { useReducer } from 'react'
+import { spliceReturn } from './splice-return'
 
-const initialState = {
+export interface Product {
+  id: number
+  name: string
+  price: number
+  image: string
+}
+
+export interface ProductInCart extends Product {
+  count: number
+}
+
+export interface CartState {
+  items: ProductInCart[]
+  totalPrice: number
+  itemCount: number
+}
+
+const initialState: CartState = {
   items: [],
   totalPrice: 0,
   itemCount: 0,
 }
 
-const cartReducer = (state, action) => {
+export type CartAction =
+  | { type: 'ADD_ITEM'; product: Product }
+  | { type: 'REMOVE_ITEM'; productId: number }
+  | { type: 'CLEAR_CART' }
+  | { type: 'APPLY_DISCOUNT'; discountPercent: number }
+
+const cartReducer = (state: CartState, action: CartAction): CartState => {
+  // strict 모드에서 두번 실행 된다 하지만 state 가 같은 값이 두번오기 때문에 만약 퓨어하게 값을 리턴하면 두번 실행되는 것 처럼 되지 않는다
   switch (action.type) {
-    case 'ADD_ITEM':
+    case 'ADD_ITEM': {
+      const existingItemIndex = state.items.findIndex((item) => item.id === action.product.id)
+      if (existingItemIndex === -1) {
+        return {
+          items: [...state.items, { ...action.product, count: 1 }],
+          totalPrice: state.totalPrice + action.product.price,
+          itemCount: state.itemCount + 1,
+        }
+      }
+
       return {
-        items: [...state.items, action.product],
+        items: spliceReturn(state.items, existingItemIndex, 1, {
+          ...state.items[existingItemIndex],
+          count: state.items[existingItemIndex].count + 1,
+        }),
         totalPrice: state.totalPrice + action.product.price,
         itemCount: state.itemCount + 1,
       }
-
+    }
     case 'REMOVE_ITEM': {
-      const removedItem = state.items.find((item) => item.id === action.productId)
+      const findIndex = state.items.findIndex((item) => item.id === action.productId)
+      const find = state.items[findIndex]
+
+      if (find && find.count === 1) {
+        return {
+          items: spliceReturn(state.items, findIndex, 1),
+          totalPrice: state.totalPrice - find.price,
+          itemCount: state.itemCount - 1,
+        }
+      }
+
+      if (find) {
+        return {
+          items: spliceReturn(state.items, findIndex, 1, { ...find, count: find.count - 1 }),
+          totalPrice: state.totalPrice - find.price,
+          itemCount: state.itemCount - 1,
+        }
+      }
+
       return {
-        items: state.items.filter((item) => item.id !== action.productId),
-        totalPrice: state.totalPrice - removedItem.price,
-        itemCount: state.itemCount - 1,
+        ...state,
       }
     }
 
@@ -39,10 +92,15 @@ const cartReducer = (state, action) => {
 }
 
 const ShoppingCart = () => {
-  const [state, dispatch] = useReducer(cartReducer, initialState)
+  const products = [
+    { id: 1, name: '상품1', price: 10000, image: 'https://picsum.photos/150' },
+    { id: 2, name: '상품2', price: 20000, image: 'https://picsum.photos/150' },
+  ]
+  const [state, dispatch] = useReducer(cartReducer, { ...initialState })
   const { items, totalPrice, itemCount } = state
 
   const addItem = (product) => {
+    console.log(product, 'product')
     dispatch({ type: 'ADD_ITEM', product })
   }
 
@@ -63,13 +121,11 @@ const ShoppingCart = () => {
       <h2>장바구니 ({itemCount}개)</h2>
 
       <div className="flex flex-col gap-2">
-        <button onClick={() => addItem({ id: 1, name: '상품1', price: 10000, image: 'https://picsum.photos/150' })}>
-          상품 1 추가 가격: 10000
-        </button>
-
-        <button onClick={() => addItem({ id: 2, name: '상품2', price: 20000, image: 'https://picsum.photos/150' })}>
-          상품 2 추가 가격: 20000
-        </button>
+        {products.map((product) => (
+          <button key={product.id} onClick={() => addItem(product)}>
+            {product.name} 추가 가격: {product.price.toLocaleString()}
+          </button>
+        ))}
       </div>
 
       <div className="flex flex-col gap-2">
@@ -79,6 +135,7 @@ const ShoppingCart = () => {
             <div className="flex flex-col gap-2">
               <h3>{item.name}</h3>
               <p>{item.price.toLocaleString()}원</p>
+              <p>수량: {item.count}</p>
             </div>
             <button onClick={() => removeItem(item.id)}>삭제</button>
           </div>
@@ -87,6 +144,7 @@ const ShoppingCart = () => {
 
       <div className="flex flex-col gap-2">
         <p>총 금액: {totalPrice.toLocaleString()}원</p>
+        <p>총 수량: {itemCount}</p>
         <button onClick={() => applyDiscount(10)}>10% 할인 적용</button>
         <button onClick={clearCart}>장바구니 비우기</button>
       </div>

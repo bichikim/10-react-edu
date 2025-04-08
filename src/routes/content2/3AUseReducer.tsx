@@ -7,22 +7,60 @@ interface Product {
   image: string
 }
 
+interface ProductInCart extends Product {
+  count: number
+}
+
 const ShoppingCart = () => {
-  const [items, setItems] = useState<Product[]>([])
+  const [items, setItems] = useState<ProductInCart[]>([])
   const [totalPrice, setTotalPrice] = useState(0)
   const [itemCount, setItemCount] = useState(0)
 
+  const products = [
+    { id: 1, name: '상품1', price: 10000, image: 'https://picsum.photos/150' },
+    { id: 2, name: '상품2', price: 20000, image: 'https://picsum.photos/150' },
+  ]
+
   const addItem = (product: Product) => {
-    setItems((prevItems) => [...prevItems, product])
+    const existingItemIndex = items.findIndex((item) => item.id === product.id)
+
+    if (existingItemIndex === -1) {
+      setItems((prevItems) => [...prevItems, { ...product, count: 1 }])
+    } else {
+      setItems((prevItems) => {
+        const newItems = [...prevItems]
+        newItems[existingItemIndex] = {
+          ...newItems[existingItemIndex],
+          count: newItems[existingItemIndex].count + 1,
+        }
+        return newItems
+      })
+    }
+
     setTotalPrice((prevPrice) => prevPrice + product.price)
     setItemCount((prevCount) => prevCount + 1)
   }
 
-  const removeItem = (productId) => {
-    const removedItem = items.find((item) => item.id === productId)
-    if (!removedItem) return
-    setItems((prevItems) => prevItems.filter((item) => item.id !== productId))
-    setTotalPrice((prevPrice) => prevPrice - removedItem.price)
+  const removeItem = (productId: number) => {
+    const existingItemIndex = items.findIndex((item) => item.id === productId)
+    const existingItem = items[existingItemIndex]
+
+    if (!existingItem) return
+
+    if (existingItem.count === 1) {
+      setItems((prevItems) => prevItems.filter((item) => item.id !== productId))
+    } else {
+      setItems((prevItems) => {
+        const newItems = [...prevItems]
+        newItems[existingItemIndex] = {
+          ...newItems[existingItemIndex],
+          count: newItems[existingItemIndex].count - 1,
+        }
+        return newItems
+      })
+    }
+
+    setTotalPrice((prevPrice) => prevPrice - existingItem.price)
     setItemCount((prevCount) => prevCount - 1)
   }
 
@@ -32,21 +70,20 @@ const ShoppingCart = () => {
     setItemCount(0)
   }
 
-  const applyDiscount = (discountPercent) => {
+  const applyDiscount = (discountPercent: number) => {
     setTotalPrice((prevPrice) => prevPrice * (1 - discountPercent / 100))
   }
 
   return (
     <div className="shopping-cart">
       <h2>장바구니 ({itemCount}개)</h2>
-      <div className="flex flex-col gap-2">
-        <button onClick={() => addItem({ id: 1, name: '상품1', price: 10000, image: 'https://picsum.photos/150' })}>
-          상품 1 추가 가격: 10000
-        </button>
 
-        <button onClick={() => addItem({ id: 2, name: '상품2', price: 20000, image: 'https://picsum.photos/150' })}>
-          상품 2 추가 가격: 20000
-        </button>
+      <div className="flex flex-col gap-2">
+        {products.map((product) => (
+          <button key={product.id} onClick={() => addItem(product)}>
+            {product.name} 추가 가격: {product.price.toLocaleString()}
+          </button>
+        ))}
       </div>
 
       <div className="flex flex-col gap-2">
@@ -56,6 +93,7 @@ const ShoppingCart = () => {
             <div className="flex flex-col gap-2">
               <h3>{item.name}</h3>
               <p>{item.price.toLocaleString()}원</p>
+              <p>수량: {item.count}</p>
             </div>
             <button onClick={() => removeItem(item.id)}>삭제</button>
           </div>
@@ -64,6 +102,7 @@ const ShoppingCart = () => {
 
       <div className="flex flex-col gap-2">
         <p>총 금액: {totalPrice.toLocaleString()}원</p>
+        <p>총 수량: {itemCount}</p>
         <button onClick={() => applyDiscount(10)}>10% 할인 적용</button>
         <button onClick={clearCart}>장바구니 비우기</button>
       </div>
