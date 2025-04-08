@@ -17,7 +17,7 @@ import CreateComponent from './routes/content1/CreateComponent.tsx'
 import ConditionJSX from './routes/content1/ConditionJSX.tsx'
 import LoopJSX from './routes/content1/LoopJSX.tsx'
 import LiftingState from './routes/content2/LiftingState.tsx'
-import ParentChildren from './routes/content2/ParentChildren.tsx'
+import ParentChildren from './routes/content2/4ParentChildren.tsx'
 import Deps from './routes/content3/Deps.tsx'
 import Fetch from './routes/content3/Fetch.tsx'
 import UseEffect from './routes/content3/UseEffect.tsx'
@@ -30,7 +30,11 @@ import { SuspenseExample } from './routes/content4/Suspense.tsx'
 import { DebounceThrottleExample } from './routes/content4/DebounceThrottle.tsx'
 import { ElementEvent } from './routes/content1/ElementEvent.tsx'
 import ExcludeDeps from './routes/content3/ExcludeDeps.tsx'
-
+import Rendering from './routes/content2/1Rendering.tsx'
+import UpdateState from './routes/content2/2UpdateState.tsx'
+import FlushSync from './routes/content2/2AFlushSync.tsx'
+import UseReducer1 from './routes/content2/3AUseReducer.tsx'
+import UseReducer2 from './routes/content2/3BUseReducer.tsx'
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
@@ -55,6 +59,11 @@ createRoot(document.getElementById('root')!).render(
               <Route path="props-type" element={<PropsType />} />
             </Route>
             <Route path="content2">
+              <Route path="rendering" element={<Rendering />} />
+              <Route path="update-state" element={<UpdateState />} />
+              <Route path="flush-sync" element={<FlushSync />} />
+              <Route path="use-reducer1" element={<UseReducer1 />} />
+              <Route path="use-reducer2" element={<UseReducer2 />} />
               <Route path="lifting-state" element={<LiftingState />} />
               <Route path="parent-children" element={<ParentChildren />} />
             </Route>

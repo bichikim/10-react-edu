@@ -9,7 +9,16 @@ const NameInput = (props: NameInputProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(event.target.value)
   }
-  return <input title="name" placeholder="name" type="text" onChange={handleChange} value={props.name ?? ''}></input>
+  return (
+    <input
+      className="border-2 border-blue-500"
+      title="name"
+      placeholder="name"
+      type="text"
+      onChange={handleChange}
+      value={props.name ?? ''}
+    ></input>
+  )
 }
 
 interface AgeProps {
@@ -21,10 +30,19 @@ const Age = (props: AgeProps) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     props.onChange?.(parseInt(event.target.value))
   }
-  return <input title="age" placeholder="age" type="number" onChange={handleChange} value={props.age ?? 0}></input>
+  return (
+    <input
+      className="border-2 border-red-500"
+      title="age"
+      placeholder="age"
+      type="number"
+      onChange={handleChange}
+      value={props.age ?? 0}
+    ></input>
+  )
 }
 
-interface CardProps {    
+interface CardProps {
   name: string
   age: number
   onClick?: () => void
@@ -34,7 +52,7 @@ interface CardProps {
 
 const Card = (props: CardProps) => {
   return (
-    <div>
+    <div className="flex flex-col gap-2 border-2 border-green-500 p-2">
       <Age age={props.age} onChange={props.onChangeAge} />
       <NameInput name={props.name} onChange={props.onChangeName} />
       <button onClick={props.onClick}>Click</button>
@@ -86,7 +104,15 @@ const Parent = () => {
     console.log('clicked')
   }
 
-  return <Card name={state.name} age={state.age} onClick={handleClick} onChangeName={handleNameChange} onChangeAge={handleAgeChange} />
+  return (
+    <div>
+      <div className="flex flex-col gap-2">
+        <span>{state.name}</span>
+        <span>{state.age}</span>
+      </div>
+      <Card name={state.name} age={state.age} onClick={handleClick} onChangeName={handleNameChange} onChangeAge={handleAgeChange} />
+    </div>
+  )
 }
 
 export default function ParentChildren() {
