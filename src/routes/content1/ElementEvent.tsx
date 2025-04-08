@@ -5,3 +5,7 @@ export const ElementEvent = () => {
 
   return <div onClick={handleClick}>ElementEvent</div>
 }
+
+export default function ElementEventPage() {
+  return <ElementEvent />
+}

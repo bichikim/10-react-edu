@@ -33,7 +33,7 @@ export function MyProvider({ children }: MyProviderProps) {
   )
 }
 
-export function Context() {
+export default function Context() {
   return (
     <MyProvider>
       <AComponent />

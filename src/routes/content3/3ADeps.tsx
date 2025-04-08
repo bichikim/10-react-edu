@@ -9,10 +9,13 @@ const DepsComponent = () => {
 
   const handleClick = useCallback(() => {
     setState(state + 1)
+
+    // state 변경 시 새로운 함수 반환
   }, [state])
 
   const stateWithDeco = useMemo(() => {
     return `${state}!!!`
+    // deps 변경 시 새로운 값 반환
   }, [state])
 
   return (

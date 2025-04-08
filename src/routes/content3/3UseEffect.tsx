@@ -5,17 +5,19 @@ const UseEffectComponent = () => {
 
   useEffect(() => {
     console.log('useEffect once')
+    // 최초 랜더링 시 실행
   }, [])
 
   useEffect(() => {
     console.log('useEffect always')
+    // 랜더링 될 때마다 실행
   })
 
   useEffect(
     () => {
       console.log('useEffect when state changed')
     },
-    // deps
+    // deps state 변경 시 실행
     [state],
   )
 

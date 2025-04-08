@@ -16,25 +16,27 @@ import JSXElement from './routes/content1/JSXElement.tsx'
 import CreateComponent from './routes/content1/CreateComponent.tsx'
 import ConditionJSX from './routes/content1/ConditionJSX.tsx'
 import LoopJSX from './routes/content1/LoopJSX.tsx'
-import LiftingState from './routes/content2/LiftingState.tsx'
+import LiftingState from './routes/content2/5LiftingState.tsx'
 import ParentChildren from './routes/content2/4ParentChildren.tsx'
-import Deps from './routes/content3/Deps.tsx'
-import Fetch from './routes/content3/Fetch.tsx'
-import UseEffect from './routes/content3/UseEffect.tsx'
-import Ref from './routes/content3/Ref.tsx'
-import HookOutside from './routes/content3/HookOutside.tsx'
+import Deps from './routes/content3/3ADeps.tsx'
+import Fetch from './routes/content3/4Fetch.tsx'
+import UseEffect from './routes/content3/3UseEffect.tsx'
+import Ref from './routes/content3/2Ref.tsx'
+import HookOutside from './routes/content3/1HookOutside.tsx'
 import Main from './routes/mini-project/Main.tsx'
-import { ThemeContextExample } from './routes/content4/ThemeContext.tsx'
-import { ErrorBoundaryExample } from './routes/content4/ErrorBoundary.tsx'
-import { SuspenseExample } from './routes/content4/Suspense.tsx'
-import { DebounceThrottleExample } from './routes/content4/DebounceThrottle.tsx'
-import { ElementEvent } from './routes/content1/ElementEvent.tsx'
-import ExcludeDeps from './routes/content3/ExcludeDeps.tsx'
+import ThemeContextExample from './routes/content4/2ThemeContext.tsx'
+import Context from './routes/content4/1Context.tsx'
+import ErrorBoundaryExample from './routes/content4/ErrorBoundary.tsx'
+import SuspenseExample from './routes/content4/3Suspense.tsx'
+import DebounceThrottleExample from './routes/content4/DebounceThrottle.tsx'
+import ElementEvent from './routes/content1/ElementEvent.tsx'
+import ExcludeDeps from './routes/content3/5ExcludeDeps.tsx'
 import Rendering from './routes/content2/1Rendering.tsx'
 import UpdateState from './routes/content2/2UpdateState.tsx'
 import FlushSync from './routes/content2/2AFlushSync.tsx'
 import UseReducer1 from './routes/content2/3AUseReducer.tsx'
 import UseReducer2 from './routes/content2/3BUseReducer.tsx'
+import Test from './routes/content4/Test.tsx'
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
@@ -76,10 +78,12 @@ createRoot(document.getElementById('root')!).render(
               <Route path="use-effect" element={<UseEffect />} />
             </Route>
             <Route path="content4">
+              <Route path="context" element={<Context />} />
               <Route path="theme-context" element={<ThemeContextExample />} />
               <Route path="error-boundary" element={<ErrorBoundaryExample />} />
               <Route path="suspense" element={<SuspenseExample />} />
               <Route path="debounce-throttle" element={<DebounceThrottleExample />} />
+              <Route path="test" element={<Test />} />
             </Route>
             <Route path="mini-project" element={<Main />} />
           </Route>

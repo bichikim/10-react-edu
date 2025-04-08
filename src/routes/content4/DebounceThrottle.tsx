@@ -26,7 +26,7 @@ function useThrottle<T extends (...args: any[]) => any>(callback: T, delay: numb
   }) as T
 }
 
-export function DebounceThrottleExample() {
+export default function DebounceThrottleExample() {
   const [input, setInput] = useState('')
   const [count, setCount] = useState(0)
 

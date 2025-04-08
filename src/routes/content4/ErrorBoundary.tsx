@@ -43,7 +43,7 @@ class ErrorBoundary extends Component<Props, State> {
   }
 }
 
-export function ErrorBoundaryExample() {
+export default function ErrorBoundaryExample() {
   return (
     <div className="p-4">
       <ErrorBoundary>

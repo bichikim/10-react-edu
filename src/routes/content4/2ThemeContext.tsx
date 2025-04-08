@@ -4,7 +4,7 @@ type Theme = 'light' | 'dark'
 
 interface ThemeContextType {
   theme: Theme
-  toggleTheme: () => void
+  handleToggleTheme: () => void
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
@@ -12,11 +12,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined)
 function ThemeProvider({ children }: { children: ReactNode }) {
   const [theme, setTheme] = useState<Theme>('light')
 
-  const toggleTheme = () => {
+  const handleToggleTheme = () => {
     setTheme((prev) => (prev === 'light' ? 'dark' : 'light'))
   }
 
-  return <ThemeContext.Provider value={{ theme, toggleTheme }}>{children}</ThemeContext.Provider>
+  return <ThemeContext.Provider value={{ theme, handleToggleTheme }}>{children}</ThemeContext.Provider>
 }
 
 function useTheme() {
@@ -27,23 +27,25 @@ function useTheme() {
   return context
 }
 
-export function ThemeContextExample() {
+function ThemeToggle() {
+  const { theme, handleToggleTheme } = useTheme()
+
+  const className = `${theme === 'light' ? 'text-black' : 'text-white'} ${theme === 'light' ? 'bg-white' : 'bg-black'}`
+
+  return (
+    <div>
+      <span className={className}>{theme}</span>
+      <button onClick={handleToggleTheme}>테마 변경</button>
+    </div>
+  )
+}
+
+export default function ThemeContextExample() {
   return (
     <div>
       <ThemeProvider>
         <ThemeToggle />
       </ThemeProvider>
-    </div>
-  )
-}
-
-function ThemeToggle() {
-  const { theme, toggleTheme } = useTheme()
-
-  return (
-    <div>
-      <span>{theme}</span>
-      <button onClick={toggleTheme}>테마 변경</button>
     </div>
   )
 }

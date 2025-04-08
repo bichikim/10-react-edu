@@ -13,7 +13,7 @@ export default function OldValue() {
   return (
     <div>
       <p>Count: {count}</p>
-      <p>Old Count: {oldCount}</p>
+      <p>Old Count: {oldCount.current}</p>
       <button onClick={handleIncrement}>Increment</button>
     </div>
   )

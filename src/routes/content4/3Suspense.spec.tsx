@@ -3,7 +3,7 @@
  */
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen, act } from '@testing-library/react'
-import { SuspenseExample } from './Suspense'
+import { SuspenseExample } from './3Suspense'
 
 describe('Suspense', () => {
   it('shows content after loading', async () => {
