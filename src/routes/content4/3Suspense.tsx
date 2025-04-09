@@ -1,4 +1,4 @@
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useRef } from 'react'
 import { useFetch } from './use-fetch'
 
 async function fetchData(value: number) {
@@ -12,9 +12,14 @@ interface AsyncContentProps {
 }
 // 비동기 컴포넌트
 const AsyncContent = ({ timeout }: AsyncContentProps) => {
+  const timeRef = useRef(timeout)
   const data = useFetch(fetchData, timeout)
 
-  return <div>{data?.message}</div>
+  return (
+    <div>
+      {data?.message} {timeRef.current}
+    </div>
+  )
 }
 
 // 로딩 상태를 표시하는 컴포넌트

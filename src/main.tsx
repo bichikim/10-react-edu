@@ -37,6 +37,8 @@ import FlushSync from './routes/content2/2AFlushSync.tsx'
 import UseReducer1 from './routes/content2/3AUseReducer.tsx'
 import UseReducer2 from './routes/content2/3BUseReducer.tsx'
 import Test from './routes/content4/Test.tsx'
+import Immer from './routes/content6/1Immer.tsx'
+import StrictEffect from './routes/content3/7StrictEffect.tsx'
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
@@ -76,6 +78,7 @@ createRoot(document.getElementById('root')!).render(
               <Route path="hook-outside" element={<HookOutside />} />
               <Route path="ref" element={<Ref />} />
               <Route path="use-effect" element={<UseEffect />} />
+              <Route path="strict-effect" element={<StrictEffect />} />
             </Route>
             <Route path="content4">
               <Route path="context" element={<Context />} />
@@ -84,6 +87,9 @@ createRoot(document.getElementById('root')!).render(
               <Route path="suspense" element={<SuspenseExample />} />
               <Route path="debounce-throttle" element={<DebounceThrottleExample />} />
               <Route path="test" element={<Test />} />
+            </Route>
+            <Route path="content6">
+              <Route path="immer" element={<Immer />} />
             </Route>
             <Route path="mini-project" element={<Main />} />
           </Route>

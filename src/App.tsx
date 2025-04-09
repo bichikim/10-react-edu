@@ -31,6 +31,8 @@ function App() {
           <Link to="/content3/deps">Content3/3A Deps</Link>
           <Link to="/content3/fetch">Content3/4 Fetch</Link>
           <Link to="/content3/exclude-deps">Content3/5 ExcludeDeps</Link>
+          <Link to="/content3/updated-ref">Content3/6 UpdatedRef</Link>
+          <Link to="/content3/strict-effect">Content3/7 StrictEffect</Link>
           <Link to="/content4/context">Content4/1 Context</Link>
           <Link to="/content4/theme-context">Content4/2 ThemeContext</Link>
           <Link to="/content4/suspense">Content4/3 Suspense</Link>

@@ -4,15 +4,6 @@ import { useUpdatedRef } from '../content3/updated-ref'
 type FetchState = 'pending' | 'fulfilled' | 'error'
 
 export const useFetch = <T, R>(loader: (payload: T, signal: AbortSignal) => Promise<R>, payload: T): R | undefined => {
-  const resolvePromise = (result: R) => {
-    setStatus('fulfilled')
-    setResult(result)
-  }
-  const rejectPromise = (error: Error) => {
-    setStatus('error')
-    setError(error)
-  }
-
   const [promise, setPromise] = useState<Promise<void>>()
   const [status, setStatus] = useState<FetchState>('pending')
   const [result, setResult] = useState<R>()
@@ -20,6 +11,16 @@ export const useFetch = <T, R>(loader: (payload: T, signal: AbortSignal) => Prom
 
   const loaderRef = useUpdatedRef(loader)
   const fetchedPayload = useRef<T | null | undefined>(null)
+
+  const resolvePromise = (result: R) => {
+    setStatus('fulfilled')
+    setResult(result)
+  }
+
+  const rejectPromise = (error: Error) => {
+    setStatus('error')
+    setError(error)
+  }
 
   useEffect(() => {
     const abortController = new AbortController()
